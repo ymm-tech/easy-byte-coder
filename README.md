@@ -1,9 +1,47 @@
+[TOC]
 
 
 
 # 简介
 
 easy-byte-coder 一款字节码注入框架，在 JVM 平台非侵入式字节码注入的解决方案，帮助java应用开发者，快速开发字节码注入程序,无需关心底层instrument原理以及实现细节，用户使用plugin的形式快速提供aop能力，并且可以选择使用静态编织(agent)与动态编织(attach)两种方案，plugin编写起来非常简单。
+
+
+
+## 启动方法
+
+Attach(动态注入)模式时,此工具依赖被注入应用的jvm运行时的环境变量，请确认JAVA_HOME是否存在，Agent(静态注入)模式无需此配置
+
+attach模式启动:
+
+```
+java -Xbootclasspath/a:$JAVA_HOME/lib/tools.jar -jar bootstrap.jar
+```
+
+选择注入进程：
+
+![image-20200818201959949](./img/image-20200818201959949.png)
+
+如果输出：
+
+```
+Attaching to target JVM with PID: 91420
+Attached to target JVM and loaded Java agent successfully
+```
+
+则表示注入成功
+
+在一些情况下，如修改jdk源码，对jdk的方法进行注入，或是启动时就需要进行大量的修改，此时可以使用agent模式
+
+agent通过增加jvm参数启动plugins=后的jar包名是 easy-byte-coder编译后生成的jar包
+
+agent模式启动:
+
+```
+-javaagent:/Users/xujie/work/ymm/jar/agent.jar=plugins=systemtime.jar
+```
+
+
 
 ## 工作原理：
 

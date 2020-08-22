@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Created-By: Plexus Archiver 3.5
+Premain-Class: io.manbang.easybytecoder.client.Agent
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+Can-Set-Native-Method-Prefix: true

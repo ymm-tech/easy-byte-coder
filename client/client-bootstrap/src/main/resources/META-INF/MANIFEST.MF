@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Main-Class: io.manbang.easybytecoder.clientbootstrap.Loder.Launcher
+Agent-Class: io.manbang.easybytecoder.clientbootstrap.EasyByteCoderClientBootStrap
+Can-Retransform-Classes: true
+Can-Redefine-Classes: true
+
