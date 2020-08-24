@@ -53,11 +53,11 @@ In Easy-byte-coder, you can implement injection of method pointcuts by extending
 
 ### Class isolation
 
-Easy-byte-coder implements class isolation by applying different class loaderes, which makes application classes and zodiac classes not interfere with each other. 
+Easy-byte-coder implements class isolation by applying different class loaderes, which makes application classes and easy-byte-coder classes not interfere with each other. 
 
 ### Resource Manager
 
-The resource manager ZodiacResourceObjectPool make developers easily switch and obtain class loaderes of application space runtime and zodiac. By calling the objects of application space, you can reuse some basic functions in original application, and then improve development efficiency.
+The resource manager ResourceObjectPool make developers easily switch and obtain class loaderes of application space runtime and easy-byte-coder. By calling the objects of application space, you can reuse some basic functions in original application, and then improve development efficiency.
 
 ### spi-plugin
 

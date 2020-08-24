@@ -59,7 +59,7 @@ agent模式启动:
 
 ### 类隔离
 
-通过不同的classLoade实现类隔离，使应用类与zodiac类不会相互干扰，并且实现了资源管理器ZodiacResourceObjectPool，使得用户可以方便的切换获取应用空间运行时类加载器与zodiac类加载器，方便用户调用应用空间的类对象，复用原有应用提供的一些基础功能，无需重新在zodiac中编写，加速开发效率。
+通过不同的classLoade实现类隔离，使应用类与easy-byte-coder类不会相互干扰，并且实现了资源管理器ResourceObjectPool，使得用户可以方便的切换获取应用空间运行时类加载器与easy-byte-coder类加载器，方便用户调用应用空间的类对象，复用原有应用提供的一些基础功能，无需重新在easy-byte-coder中编写，加速开发效率。
 
 ### 资源管理器
 
