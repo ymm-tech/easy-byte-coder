@@ -12,13 +12,13 @@ Easy-byte-coder is a non-invasive bytecode injection framework based on JVM. Jav
 
 In Attach mode, Easy-byte-coder depends on the jvm runtime environment variable, please make sure **JAVA_HOME** existed. Agent mode has no need for this setting.
 
-Starting in Attach mode:
+Start in Attach mode:
 
 ```
 java -Xbootclasspath/a:$JAVA_HOME/lib/tools.jar -jar bootstrap.jar
 ```
 
- Next, selecting the process to inject:
+ Next, select the process to inject:
 
 ![image-20200818201959949](./img/image-20200818201959949.png)
 
@@ -31,7 +31,7 @@ Attached to target JVM and loaded Java agent successfully
 
 If you need to modify JDK source codes, like injecting JDK methods, or making many modifications when starting, you can use Agent mode.
 
-Starting in Agent mode:
+Start in Agent mode:
 
 ```
 -javaagent:/Users/xujie/work/ymm/jar/agent.jar=plugins=systemtime.jar:RunMode=mock
@@ -44,10 +44,10 @@ Starting in Agent mode:
 In Easy-byte-coder, you can implement injection of method pointcuts by extending interface meanwhile specifying the class to modify. These pointcuts allowed to use currently include: 
 
 - LocalVariables: add LocalVariables in method.
-- Before: modify before mothed execution.
-- After: modify before mothed return.
+- Before: modify before method execution.
+- After: modify before method return.
 - Catch: catch customized exception.
-- Body: replace the whole mothod body.
+- Body: replace the whole method body.
 
 ### Class isolation
 
