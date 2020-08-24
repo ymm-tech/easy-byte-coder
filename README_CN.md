@@ -5,7 +5,7 @@
 
 # 简介
 
-easy-byte-coder 一款字节码注入框架，在 JVM 平台非侵入式字节码注入的解决方案，帮助java应用开发者，快速开发字节码注入程序,无需关心底层instrument原理以及实现细节，用户使用plugin的形式快速提供aop能力，并且可以选择使用静态编织(agent)与动态编织(attach)两种方案，plugin编写起来非常简单。
+easy-byte-coder 一款字节码注入框架，一款jvm sandbox，在 JVM 平台非侵入式字节码注入的解决方案，帮助java应用开发者，快速开发字节码注入程序,无需关心底层instrument原理以及实现细节，用户使用plugin的形式快速提供aop能力，并且可以选择使用静态编织(agent)与动态编织(attach)两种方案，plugin编写起来非常简单。
 
 
 
