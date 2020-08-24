@@ -1,5 +1,7 @@
 
+<a href="https://github.com/ymm-tech/easy-byte-coder/blob/master/README.md" title="English_description">English description</a>
 
+<a href="https://github.com/ymm-tech/easy-byte-coder/wiki">WIKI使用手册</a>
 
 # 简介
 
