@@ -13,7 +13,7 @@ import io.manbang.easybytecoder.traffichandler.annotation.ResourceToImport;
 @AutoService(TrafficHandler.class)
 @ModifyClassName("org/springframework/context/support/AbstractApplicationContext")
 @ResourceToImport({"io.manbang.easybytecoder.runtimecommonapi.utils.EasyByteCoderResourceObjectPool",
-        "io.manbang.easybytecoder.plugin.springplugin.modify.runtime.ArgumentPrintAspect"})
+        "io.manbang.easybytecoder.plugin.springplugin.modify.runtime.RegisterAspectAdvice"})
 public class SpringPlugin implements TrafficHandler {
 
     @ModifyMethod(methodName = "invokeBeanFactoryPostProcessors")
