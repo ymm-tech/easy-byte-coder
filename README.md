@@ -78,7 +78,9 @@ The use scenes of Easy-byte-coder be applied include:
 
 
 ## Contributing
-
+- [yang.gao](https://github.com/gaozhaoyanghe)
+- [jie.xu](https://github.com/njxjxj)
+- [xinhua.yang](https://github.com/yangxinghua0716)
 
 
 ## To be continue 

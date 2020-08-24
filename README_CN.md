@@ -82,6 +82,9 @@ agent模式启动:
 # 交流渠道
 
 # 贡献者名单（排名不分前后）
+- [yang.gao](https://github.com/gaozhaoyanghe)
+- [jie.xu](https://github.com/njxjxj)
+- [xinhua.yang](https://github.com/yangxinghua0716)
 
 # 敬请期待（衍生工具开源计划）
 
