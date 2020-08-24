@@ -80,7 +80,7 @@ agent模式启动:
 - 线上流量录制回放结果对比
 
 # 交流渠道
-
+![](./img/20200824164911.jpg)
 # 贡献者名单（排名不分前后）
 - [yang.gao](https://github.com/gaozhaoyanghe)
 - [jie.xu](https://github.com/njxjxj)
