@@ -1,7 +1,7 @@
 package io.manbang.easybytecoder.plugin.simplehotfix.mock.runtime;
 
 
-import io.manbang.helloworld.UserModel;
+import io.manbang.helloworld.HelloWorld.UserModel;
 
 /**
  * @author xujie
