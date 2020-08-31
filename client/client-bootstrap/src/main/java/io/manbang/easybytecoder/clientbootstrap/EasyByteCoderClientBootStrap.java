@@ -1,5 +1,8 @@
 package io.manbang.easybytecoder.clientbootstrap;
 
+import com.sun.net.httpserver.HttpServer;
+import io.manbang.easybytecoder.clientbootstrap.server.HttpHandlerTools;
+import io.manbang.easybytecoder.clientbootstrap.server.model.AgentInfo;
 import io.manbang.easybytecoder.clientbootstrap.util.SystemClassTransformerProxy;
 import io.manbang.easybytecoder.clientbootstrap.util.SystemHandler;
 import io.manbang.easybytecoder.traffichandler.AttachTrafficHandler;
@@ -11,10 +14,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.Instrumentation;
+import java.lang.instrument.UnmodifiableClassException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.InetSocketAddress;
 import java.util.*;
+
+import static io.manbang.easybytecoder.clientbootstrap.server.HttpThreadPool.httpServerPool;
 
 /**
  * @author GaoYang 2018/12/23
@@ -81,7 +89,7 @@ public class EasyByteCoderClientBootStrap {
         AnnotationProcess annotationProcess = new AnnotationProcess();
 
         try {
-            annotationProcess.process(trafficHandler,jarFilePath);
+            annotationProcess.process(trafficHandler, jarFilePath);
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -114,33 +122,65 @@ public class EasyByteCoderClientBootStrap {
         logger.info("agent attach start");
         ClassLoader pluginClassLoader = PluginClassLoaderFactory.createPluginClassLoader(EasyByteCoderClientBootStrap.class.getClassLoader(), new File(pathName), pluginJarFiles);
         ServiceLoader<AttachTrafficHandler> serviceLoader = ServiceLoader.load(AttachTrafficHandler.class, pluginClassLoader);
-
+        List<AgentInfo> agentInfoList = new ArrayList<>();
         AnnotationProcess annotationProcess = new AnnotationProcess();
         for (AttachTrafficHandler trafficHandler : serviceLoader) {
             try {
                 String jarFilePath = trafficHandler.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
                 logger.info("initing plugin, name: {}, jar path: {}", trafficHandler.getClass().getName(), jarFilePath);
-                HashMap<String, String> hashMap = new HashMap<>();
-                //trafficHandler.init(jarFilePath, hashMap);
-                annotationProcess.process(trafficHandler,jarFilePath);
+                annotationProcess.process(trafficHandler, jarFilePath);
                 if (annotationProcess.getBaseTransformer() instanceof BaseTransformer) {
                     ClassFileTransformer transformer = annotationProcess.getBaseTransformer();
+                    AgentInfo agentInfo = new AgentInfo();
+                    agentInfo.setClassFileTransformer(transformer);
                     if (transformer != null) {
                         logger.info("adding transformer {}", transformer.getClass().getName());
                         inst.addTransformer(transformer, true);
                         for (Class<?> clazz : inst.getAllLoadedClasses()) {
                             if (annotationProcess.getClassNameList().contains(clazz.getName())) {
                                 inst.retransformClasses(clazz);
+                                agentInfo.getClazzs().add(clazz);
                             }
                         }
                     }
+                    agentInfoList.add(agentInfo);
                 }
             } catch (Throwable throwable) {
                 logger.error("init trafficHandler error, className: " + trafficHandler.getClass().getName(), throwable);
             }
         }
+        httpServer(inst, agentInfoList);
     }
 
+
+    /**
+     * 本地http服务
+     */
+    public static void httpServer(Instrumentation inst, List<AgentInfo> agentInfos) {
+        HttpServer httpServer = null;
+        try {
+            logger.info("enablement doomHttpServer!!!!  port:8089");
+            httpServer = HttpServer.create(new InetSocketAddress(8089), 0);
+            //创建一个HttpContext，将路径为/myserver请求映射到MyHttpHandler处理器
+            httpServer.createContext("/server", new HttpHandlerTools(inst, agentInfos) {});
+
+            //设置服务器的线程池对象
+            httpServer.setExecutor(httpServerPool);
+
+            //启动服务器
+            httpServer.start();
+
+        } catch (IOException e) {
+            logger.error("httpServer start error:", e);
+            if (httpServer == null) {
+                return;
+            }
+            httpServerPool.shutdown();
+            httpServer.stop(1);
+        }
+
+
+    }
 
     private static List<String> getAttachFileList(String jarPath) {
         List<String> attachJarNames = new ArrayList<>();

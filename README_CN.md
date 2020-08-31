@@ -5,7 +5,7 @@
 
 # 简介
 
-easy-byte-coder 一款字节码注入框架，一款jvm sandbox，在 JVM 平台非侵入式字节码注入的解决方案，帮助java应用开发者，快速开发字节码注入程序,无需关心底层instrument原理以及实现细节，用户使用plugin的形式快速提供aop能力，并且可以选择使用静态编织(agent)与动态编织(attach)两种方案，plugin编写起来非常简单。
+easy-byte-coder 一款字节码注入框架，一款jvm sandbox，在 JVM 平台非侵入式字节码注入的解决方案，帮助java应用开发者，快速开发字节码注入程序,无需关心底层instrument原理以及实现细节，用户使用plugin的形式快速提供aop能力，并且可以选择使用静态编织(agent)与动态编织(attach)两种方案，plugin编写起来非常简单,并且提供http接口方便随时卸载。
 
 
 
@@ -30,6 +30,26 @@ Attaching to target JVM with PID: 91420
 Attached to target JVM and loaded Java agent successfully
 ```
 
+
+
+卸载:
+
+打开游览器，输入以下url
+
+```
+http://127.0.0.1:8089/server?uninstall
+```
+
+console输出:
+
+```
+Remove Instrumentation  className:xxxx
+```
+
+xxx为被修改的类名，此时卸载成功
+
+
+
 则表示注入成功
 
 在一些情况下，如修改jdk源码，对jdk的方法进行注入，或是启动时就需要进行大量的修改，此时可以使用agent模式
@@ -42,8 +62,6 @@ agent模式启动:
 -javaagent:/Users/xujie/work/ymm/jar/agent.jar=plugins=systemtime.jar
 ```
 
-
-
 ## 工作原理：
 
 ### 切点:
@@ -51,11 +69,11 @@ agent模式启动:
 用户根据框架要求，继承接口，指定需要修改字节码的class中的method的切点进行注入，目前允许用户使用的切点范围：
 
 - LocalVariables 在方法中加入局部变量
-
 - Before 在方法运行之前修改
 - After 在方法返回之前修改
 - Catch 自定义捕获方法异常
 - Body 替换整个方法体
+
 
 ### 类隔离
 
