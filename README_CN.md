@@ -30,7 +30,9 @@ Attaching to target JVM with PID: 91420
 Attached to target JVM and loaded Java agent successfully
 ```
 
+则表示注入成功
 
+------
 
 卸载:
 
@@ -48,9 +50,7 @@ Remove Instrumentation  className:xxxx
 
 xxx为被修改的类名，此时卸载成功
 
-
-
-则表示注入成功
+------
 
 在一些情况下，如修改jdk源码，对jdk的方法进行注入，或是启动时就需要进行大量的修改，此时可以使用agent模式
 
