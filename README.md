@@ -1,13 +1,11 @@
 
 
-
-![Bower](https://img.shields.io/badge/license-MIT-green)![AppVeyor](https://img.shields.io/appveyor/build/gruntjs/grunt)
-
 <a href="https://github.com/ymm-tech/easy-byte-coder/blob/master/README_CN.md" title="中文说明">中文说明</a>
 
 <a href="https://github.com/ymm-tech/easy-byte-coder/wiki">WIKI Manual</a>
 
 # Easy-byte-coder
+![Bower](https://img.shields.io/badge/license-MIT-green) ![AppVeyor](https://img.shields.io/appveyor/build/gruntjs/grunt)
 
 ## Introduction
 
