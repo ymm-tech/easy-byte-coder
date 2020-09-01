@@ -37,7 +37,7 @@ If you need to modify JDK source codes, like injecting JDK methods, or making ma
 Start in Agent mode:
 
 ```
--javaagent:/Users/xujie/work/ymm/jar/agent.jar=plugins=systemtime.jar:RunMode=mock
+-javaagent:/Users/xujie/work/ymm/jar/agent.jar=plugins=systemtime.jar
 ```
 
 ## How Easy-byte-coder works?
