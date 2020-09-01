@@ -232,15 +232,23 @@ public class AnnotationProcess {
             ModifyMethodModel modifyMethodModel = methodMap.get(annotation.methodName());
             if (annotation.pattern() == CodePatternEnum.Before) {
                 String results = (String) declaredMethod.invoke(trafficHandler);
+                if(modifyMethodModel.getBeforeCode()==null){
+                    modifyMethodModel.setBeforeCode(Lists.newArrayList(results));
+                }
                 modifyMethodModel.getBeforeCode().add(results);
             }
             if (annotation.pattern() == CodePatternEnum.After) {
                 String results = (String) declaredMethod.invoke(trafficHandler);
+                if(modifyMethodModel.getAfterCode()==null){
+                    modifyMethodModel.setAfterCode(Lists.newArrayList(results));
+                }
                 modifyMethodModel.getAfterCode().add(results);
             }
-
             if (annotation.pattern() == CodePatternEnum.LocalVariables) {
                 Map<String, CtClass> results = (Map<String, CtClass>) declaredMethod.invoke(trafficHandler);
+                if(modifyMethodModel.getLocalVariablesCode()==null){
+                    modifyMethodModel.setLocalVariablesCode(results);
+                }
                 modifyMethodModel.getLocalVariablesCode().putAll(results);
             }
         }
