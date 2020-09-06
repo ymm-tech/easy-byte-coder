@@ -32,6 +32,26 @@ Attaching to target JVM with PID: 91420
 Attached to target JVM and loaded Java agent successfully
 ```
 
+----
+
+Uninstall:
+
+Open the browser and enter the url below:
+
+```
+http://127.0.0.1:8089/server?uninstall
+```
+
+If  uninstall successes, you should see something outputing on console like: 
+
+```
+Remove Instrumentation  className:xxxx
+```
+
+*xxxx* is the class that is modified.
+
+----
+
 If you need to modify JDK source codes, like injecting JDK methods, or making many modifications when starting, you can use Agent mode.
 
 Start in Agent mode:
